@@ -58,6 +58,19 @@ VALUES ('Alexandre', 'Petion', 'mridl@gmail.com', '222-555-6458', '123 Main Road
 ```
 SELECT * FROM patients;
 ```
+-  **👉 Check Coords Table**
+```
+SELECT * FROM coords;
+```
+-  **👉 Insert Data in Coords Table**
+```
+INSERT INTO coords (x, y)
+VALUES (10, 20);
+```
+-  **👉 Check Coords Table**
+```
+SELECT * FROM coords;
+```
 
 ## 🌲 Check API Documentation
 
