@@ -1,0 +1,13 @@
+To excel in this hackathon, make sure you have a fundamental
+understanding of the following:
+
+- REST API Development
+- JSON Data Format
+- Database Management
+- Server Deployment
+
+Preliminary Round Focus: API Development Skills
+
+Your ability to develop efficient and robust APIs will be the key in the
+preliminary round. We'll assess other technical skills in the subsequent
+rounds.
