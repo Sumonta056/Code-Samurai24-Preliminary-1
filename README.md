@@ -1,55 +1,104 @@
+<div align = "center">
 
-```
-npm i express mysql cors dotenv ip pino pino-pretty
-```
+*------ **🧠 Tutorial NodeJS API with mySQL and Docker 🧠** ------*
 
-```
- npm i -D nodemon
-```
+#### ✍️ NodeJs API, mySQL and Docker Tutorial  :  **([👉 Video Link](https://youtu.be/8L3zwbnPugs?si=TcPRBw3TfebEBC57))** **([👉 Code Link](https://github.com/getarrays/nodejsapi/blob/master/src/controller/patient.controller.js))**
 
-```
-npm run start:dev
-```
+<hr>
+</div>
 
-```
-http://localhost:3000/
-```
 
+## 🌲 Run The Project using Docker Container
+
+-  **👉 Check any Container Running**
+```
 docker ps  -a
-
+```
+-  **👉 Run All Container**
+```
 docker-compose up -d --build
-
+```
+-  **👉 Check All Container Running**
+```
 docker ps
+```
 
+## 🌲 Check My SQL Database and Table
+
+-  **👉 Set SQL Path**
+```
 set path=%PATH%;C:\xampp\mysql\bin;
-
+```
+-  **👉 Open MySQL**
+```
 mysql -h localhost -P 3306 --protocol=tcp -uroot -pletmein
-
+```
+-  **👉 Show All Databases**
+```
  SHOW DATABASES;
-
+```
+-  **👉 Go To Database patientsdb**
+```
  USE patientsdb
-
- SELECT * FROM patients;
-
+```
+-  **👉 Show all table under patientsdb database**
+```
+SHOW TABLES;
+```
+-  **👉 Check Patients Table**
+```
+SELECT * FROM patients;
+```
+-  **👉 Insert Data in Patients Table**
+```
  INSERT INTO patients (first_name, last_name, email, phone, address, diagnosis, image_url)
 VALUES ('Alexandre', 'Petion', 'mridl@gmail.com', '222-555-6458', '123 Main Road', 'Cough', 'https://profileimage.com');
-
-
+```
+-  **👉 Check Patients Table**
+```
 SELECT * FROM patients;
+```
 
-npm install -g win-node-env
+## 🌲 Check API Documentation
 
+-  **👉 GET APIs**
+```
+http://localhost:3000
+```
+```
+http://localhost:3000/patients
+```
+-  **👉 POST APIs**
+```
+http://localhost:3000/patients
+```
 ```
 {
-  "first_name": "John",
-  "last_name": "Doe",
-  "email": "john.doe@example.com",
-  "phone": "123-456-7890",
+  "first_name": "Sumonta",
+  "last_name": "Saha",
+  "email": "sumonta@gmail.com",
+  "phone": "12222222",
   "address": "123 Main St",
   "diagnosis": "Some diagnosis",
   "image_url": "http://example.com/image.jpg"
 }
-
 ```
+![Alt text](image.png)
 
-http://localhost:3000/patients
+
+## 🌲 Extra Resources
+
+-  **👉 Set SQL Path**
+```
+npm i express mysql cors dotenv ip pino pino-pretty
+```
+```
+ npm i -D nodemon
+```
+```
+npm run start:dev
+```
+-  **👉 IF any issue with "NODE-ENV**
+```
+npm install -g win-node-env
+```
