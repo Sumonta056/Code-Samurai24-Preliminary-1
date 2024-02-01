@@ -38,3 +38,18 @@ VALUES ('Alexandre', 'Petion', 'mridl@gmail.com', '222-555-6458', '123 Main Road
 SELECT * FROM patients;
 
 npm install -g win-node-env
+
+```
+{
+  "first_name": "John",
+  "last_name": "Doe",
+  "email": "john.doe@example.com",
+  "phone": "123-456-7890",
+  "address": "123 Main St",
+  "diagnosis": "Some diagnosis",
+  "image_url": "http://example.com/image.jpg"
+}
+
+```
+
+http://localhost:3000/patients

@@ -55,6 +55,9 @@ export const createPatient = async (req, res) => {
       req.body.diagnosis,
       req.body.image_url,
     ];
+    console.log(req.body);
+
+    console.log(values);
 
     await database.query(sql, values);
 
