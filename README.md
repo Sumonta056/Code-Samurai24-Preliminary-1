@@ -2,98 +2,137 @@
 
 ## 🧠 Team Name : YOUR WORST NIGHTMARE
 
+_------ **🧠 Tutorial NodeJS API with mySQL and Docker 🧠** ------_
 
-*------ **🧠 Tutorial NodeJS API with mySQL and Docker 🧠** ------*
-
-#### ✍️ NodeJs API, mySQL and Docker Tutorial  :  **([👉 Video Link](https://youtu.be/8L3zwbnPugs?si=TcPRBw3TfebEBC57))** **([👉 Code Link](https://github.com/getarrays/nodejsapi/blob/master/src/controller/patient.controller.js))**
+#### ✍️ NodeJs API, mySQL and Docker Tutorial : **([👉 Video Link](https://youtu.be/8L3zwbnPugs?si=TcPRBw3TfebEBC57))** **([👉 Code Link](https://github.com/getarrays/nodejsapi/blob/master/src/controller/patient.controller.js))**
 
 <hr>
 </div>
 
-
 ## 🌲 Run The Project using Docker Container
 
--  **👉 Check any Container Running**
+- **👉 Check any Container Running**
+
 ```
 docker ps  -a
 ```
--  **👉 Run All Container**
+
+- **👉 Run All Container**
+
 ```
 docker-compose up -d --build
 ```
--  **👉 Check All Container Running**
+
+- **👉 Check All Container Running**
+
 ```
 docker ps
 ```
 
 ## 🌲 Check My SQL Database and Table
 
--  **👉 Set SQL Path**
+- **👉 Set SQL Path**
+
 ```
 set path=%PATH%;C:\xampp\mysql\bin;
 ```
--  **👉 Open MySQL**
+
+- **👉 Open MySQL**
+
 ```
 mysql -h localhost -P 3306 --protocol=tcp -uroot -pletmein
 ```
--  **👉 Show All Databases**
+
+- **👉 Show All Databases**
+
 ```
  SHOW DATABASES;
 ```
--  **👉 Go To Database patientsdb**
+
+- **👉 Go To Database patientsdb**
+
 ```
  USE patientsdb
 ```
--  **👉 Show all table under patientsdb database**
+
+- **👉 Show all table under patientsdb database**
+
 ```
 SHOW TABLES;
 ```
--  **👉 Check Patients Table**
+
+- **👉 Check Patients Table**
+
 ```
 SELECT * FROM patients;
 ```
--  **👉 Insert Data in Patients Table**
+
+- **👉 Insert Data in Patients Table**
+
 ```
  INSERT INTO patients (first_name, last_name, email, phone, address, diagnosis, image_url)
 VALUES ('Alexandre', 'Petion', 'mridl@gmail.com', '222-555-6458', '123 Main Road', 'Cough', 'https://profileimage.com');
 ```
--  **👉 Check Patients Table**
+
+- **👉 Check Patients Table**
+
 ```
 SELECT * FROM patients;
 ```
--  **👉 Check Coords Table**
+
+- **👉 Check Coords Table**
+
 ```
 SELECT * FROM coords;
 ```
--  **👉 Insert Data in Coords Table**
+
+- **👉 Insert Data in Coords Table**
+
 ```
 INSERT INTO coords (x, y)
 VALUES (10, 20);
 ```
--  **👉 Check Coords Table**
+
+- **👉 Check Coords Table**
+
 ```
 SELECT * FROM coords;
 ```
 
 ## 🌲 Check API Documentation
 
--  **👉 GET APIs**
+- **👉 GET APIs**
+
 ```
 http://localhost:3000
 ```
+
 ```
 http://localhost:3000/patients
 ```
+
 ```
 http://localhost:3000/p1
 ```
+
 ```
 http://localhost:3000/p1/avg
 ```
--  **👉 POST APIs**
+```
+http://localhost:5000/api/books
+```
+
+```
+http://localhost:5000/api/books?author=Jane%20Austen&sort=price
+```
+
+
+- **👉 POST APIs**
+
 ```
 http://localhost:3000/patients
 ```
+
 ```
 {
   "first_name": "Sumonta",
@@ -105,7 +144,9 @@ http://localhost:3000/patients
   "image_url": "http://example.com/image.jpg"
 }
 ```
+
 ![Alt text](image.png)
+
 ```
 http://localhost:3000/p1
 ```
@@ -115,7 +156,22 @@ http://localhost:3000/p1
   "y": "4"
 }
 ```
--  **👉 PUT APIs**
+```
+http://localhost:5000/api/books
+```
+
+```
+{
+"id": 6,
+ "title": "Emma",
+ "author": "Jane Austen",
+ "genre": "Romance",
+ "price": 22.99
+}
+```
+
+- **👉 PUT APIs**
+
 ```
 http://localhost:3000/p1
 ```
@@ -125,20 +181,36 @@ http://localhost:3000/p1
   "y": "2"
 }
 ```
+```
+http://localhost:5000/api/books/2
+```
+```
+{
+ "title": "Shash Bela",
+ "author": "SumontaSaha",
+ "genre": "Fiction",
+ "price": 42.00
+}
+```
 
 ## 🌲 Extra Resources
 
--  **👉 Set SQL Path**
+- **👉 Set SQL Path**
+
 ```
 npm i express mysql cors dotenv ip pino pino-pretty
 ```
+
 ```
  npm i -D nodemon
 ```
+
 ```
 npm run start:dev
 ```
--  **👉 IF any issue with "NODE-ENV**
+
+- **👉 IF any issue with "NODE-ENV**
+
 ```
 npm install -g win-node-env
 ```

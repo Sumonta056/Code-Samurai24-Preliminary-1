@@ -3,13 +3,13 @@ import {
   getCoords,
   createCoords,
   updateeCoords,
-  getCoordsAVG
-} from "../controller/coords.controller.js";
+  getCoordsID
+} from "../controller/books.controller.js"
 
 const patientRoutes = express.Router();
 
 patientRoutes.route("/").get(getCoords).post(createCoords).put(updateeCoords);
 
-patientRoutes.route("/avg").get(getCoordsAVG);
+patientRoutes.route("/:id").get(getCoordsID).put(updateeCoords);
 
 export default patientRoutes;

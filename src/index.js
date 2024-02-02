@@ -6,6 +6,7 @@ import Response from "./domain/response.js";
 import HttpStatus from "./controller/patient.controller.js";
 import patientRoutes from "./route/patient.route.js";
 import coordsRoutes from "./route/coords.route.js";
+import bookRoutes from "./route/book.route.js";
 import logger from "./util/logger.js";
 
 dotenv.config();
@@ -15,15 +16,15 @@ app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 app.use("/patients", patientRoutes);
-// app.use("/p1", coordsRoutes);
-app.use("/api/books", coordsRoutes);
+app.use("/p1", coordsRoutes);
+app.use("/api/books", bookRoutes);
 
 app.get("/", (req, res) =>
   res.send(
     new Response(
       HttpStatus.OK.code,
       HttpStatus.OK.status,
-      "Books API, v1.0.0 - All Systems Go"
+      "API TESTING, v1.0.0 - All Systems Go"
     )
   )
 );
