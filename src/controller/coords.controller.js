@@ -13,8 +13,8 @@ const HttpStatus = {
 };
 
 export const getCoords = (req, res) => {
-  logger.info(`${req.method} ${req.originalUrl}, fetching patients`);
-  database.query(QUERY.SELECT_CROODS, (error, results) => {
+  logger.info(`${req.method} ${req.originalUrl}, fetching all books`);
+  database.query(QUERY.SELECT_BOOKS, (error, results) => {
     if (!results) {
       res
         .status(HttpStatus.OK.code)
@@ -26,16 +26,7 @@ export const getCoords = (req, res) => {
           )
         );
     } else {
-      res
-        .status(HttpStatus.OK.code)
-        .send(
-          new Response(
-            HttpStatus.OK.code,
-            HttpStatus.OK.status,
-            `Croods successfully Retrive`,
-            { patients: results }
-          )
-        );
+      return res.status(HttpStatus.OK.code).json({ books: results });
     }
   });
 };
@@ -55,8 +46,16 @@ export const createCoords = async (req, res) => {
     console.log(req.body);
     console.log(values);
 
+    const insertedBook = {
+      id: req.body.id,
+      title: req.body.title,
+      author: req.body.author,
+      genre: req.body.genre,
+      price: req.body.price,
+    };
+
     await database.query(sql, values);
-    return res.status(HttpStatus.CREATED.code).json({ values });
+    return res.status(HttpStatus.CREATED.code).json(insertedBook);
   } catch (error) {
     logger.error("Error inserting patient:", error);
     return res
