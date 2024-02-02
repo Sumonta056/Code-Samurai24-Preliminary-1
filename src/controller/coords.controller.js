@@ -71,29 +71,89 @@ export const createCoords = async (req, res) => {
 };
 
 export const updateeCoords = async (req, res) => {
-  logger.info(`${req.method} ${req.originalUrl}, updating coordinates`);
-  try {
-    // const sqlCheck = "SELECT COUNT(*) AS count FROM coords";
-    // const result = await database.query(sqlCheck);
+  const bookId = req.params.id; // Extract book ID from the URL parameter
+  logger.info(
+    `${req.method} ${req.originalUrl}, updating book with ID: ${bookId}`
+  );
+  const { title, author, genre, price } = req.body;
 
-    let statusCode = 200;
-    // if (result[0].count === 0) {
-    //   statusCode = 201; // If no records are available, use status code 201
-    // }
+  // Check if the book exists
+  database.query(
+    "SELECT * FROM books WHERE id = ?",
+    [bookId],
+    (error, results) => {
+      if (error) {
+        console.error("Error querying the database: ", error);
+        res.status(500).json({ message: "Internal server error" });
+        return;
+      }
 
-    const sqlInsert = "INSERT INTO coords(x,y) VALUES (?, ?)";
-    const values = [req.body.x, req.body.y];
+      // If the book does not exist, return 404
+      if (results.length === 0) {
+        res
+          .status(404)
+          .json({ message: `Book with id: ${bookId} was not found` });
+        return;
+      }
 
-    // Execute the SQL query to insert coordinates into the database
-    await database.query(sqlInsert, values);
+      // Update the book
+      database.query(
+        "UPDATE books SET title=?, author=?, genre=?, price=? WHERE id=?",
+        [title, author, genre, price, bookId],
+        (error, results) => {
+          if (error) {
+            console.error("Error updating the book: ", error);
+            res.status(500).json({ message: "Internal server error" });
+            return;
+          }
+          // Fetch the updated book
+          database.query(
+            "SELECT * FROM books WHERE id = ?",
+            [bookId],
+            (error, results) => {
+              if (error) {
+                console.error("Error fetching the updated book: ", error);
+                res.status(500).json({ message: "Internal server error" });
+                return;
+              }
+              // Return the updated book
+              res.status(200).json(results[0]);
+            }
+          );
+        }
+      );
+    }
+  );
+};
 
-    // Return success response with appropriate status code and coordinates
-    return res.status(statusCode).json({ added: { values } });
-  } catch (error) {
-    // Log and return error response with status code 500
-    logger.error("Error inserting coordinates:", error);
-    return res.status(500).json({ error: "Internal Server Error" });
-  }
+export const getCoordsID = (req, res) => {
+  logger.info(`${req.method} ${req.originalUrl}, fetching all books`);
+  const bookId = req.params.id;
+  logger.info(
+    `${req.method} ${req.originalUrl}, fetching book with ID: ${bookId}`
+  );
+
+  // Query the database to fetch the book by ID
+  database.query(QUERY.SELECT_BOOK_BY_ID, [bookId], (error, results) => {
+    if (error) {
+      logger.error("Error fetching book from database:", error);
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR.code).json({
+        message: "Internal server error",
+      });
+      return;
+    }
+
+    // If no results found, return 404
+    if (results.length === 0) {
+      res.status(HttpStatus.NOT_FOUND.code).json({
+        message: `Book with id: ${bookId} was not found`,
+      });
+      return;
+    }
+
+    // Return the fetched book
+    res.status(HttpStatus.OK.code).json(results[0]);
+  });
 };
 
 export const getCoordsAVG = (req, res) => {
