@@ -16,6 +16,7 @@ app.use(express.json());
 
 app.use("/patients", patientRoutes);
 app.use("/p1", coordsRoutes);
+app.use("/api/books", coordsRoutes);
 
 app.get("/", (req, res) =>
   res.send(

@@ -41,22 +41,21 @@ export const getCoords = (req, res) => {
 };
 
 export const createCoords = async (req, res) => {
-  logger.info(`${req.method} ${req.originalUrl}, creating books`);
+  logger.info(`${req.method} ${req.originalUrl}, creating coordinates`);
   try {
-    const sql =
-      "INSERT INTO books (id, title, author, genre, price) VALUES (?, ?, ?, ?, ?)";
-    const values = [
-      req.body.id,
-      req.body.title,
-      req.body.author,
-      req.body.genre,
-      req.body.price,
-    ];
+    const sql = "INSERT INTO coords(x,y) VALUES (?, ?)";
+    const values = [req.body.x, req.body.y];
     console.log(req.body);
     console.log(values);
 
     await database.query(sql, values);
-    return res.status(HttpStatus.CREATED.code).json({ values });
+    return res.status(HttpStatus.CREATED.code).json({
+      id: values.id,
+      title: values.title,
+      author: values.author,
+      genre: values.genre,
+      price: values.price,
+    });
   } catch (error) {
     logger.error("Error inserting patient:", error);
     return res

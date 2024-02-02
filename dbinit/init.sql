@@ -4,6 +4,17 @@ CREATE DATABASE patientsdb;
 
 USE patientsdb;
 
+DROP TABLE IF EXISTS books;
+
+CREATE TABLE books (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    genre VARCHAR(255) NOT NULL,
+    price FLOAT NOT NULL
+);
+
+
 DROP TABLE IF EXISTS coords;
 
 CREATE TABLE coords (

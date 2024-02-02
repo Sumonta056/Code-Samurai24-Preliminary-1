@@ -28,9 +28,9 @@ services:
     volumes:
       - $HOME/nodeapp:/code
     ports:
-      - 3000:3000
+      - 5000:5000
     expose:
-      - 3000
+      - 5000
     environment:
       DB_HOST: mysqldb
       DB_PORT: 3306
@@ -40,7 +40,7 @@ services:
       DB_CONNECTION_LIMIT: 20
       SERVICE_TAGS: prod
       SERVICE_NAME: nodeappservice
-      SERVER_PORT: 3000
+      SERVER_PORT: 5000
     depends_on:
       - mysqldb
     networks:
