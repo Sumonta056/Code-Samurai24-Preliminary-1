@@ -81,6 +81,12 @@ http://localhost:3000
 ```
 http://localhost:3000/patients
 ```
+```
+http://localhost:3000/p1
+```
+```
+http://localhost:3000/p1/avg
+```
 -  **👉 POST APIs**
 ```
 http://localhost:3000/patients
@@ -97,7 +103,25 @@ http://localhost:3000/patients
 }
 ```
 ![Alt text](image.png)
-
+```
+http://localhost:3000/p1
+```
+```
+{
+  "x": "22",
+  "y": "4"
+}
+```
+-  **👉 PUT APIs**
+```
+http://localhost:3000/p1
+```
+```
+{
+  "x": "4",
+  "y": "2"
+}
+```
 
 ## 🌲 Extra Resources
 

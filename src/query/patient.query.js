@@ -1,5 +1,6 @@
 const QUERY = {
   SELECT_PATIENTS: 'SELECT * FROM patients ORDER BY created_at DESC LIMIT 100',
+  SELECT_CROODS: 'SELECT * FROM coords',
   SELECT_PATIENT: 'SELECT * FROM patients WHERE id = ?',
   CREATE_PATIENT: 'INSERT INTO patients(first_name, last_name, email, phone, address, diagnosis, image_url) VALUES (?, ?, ?, ?, ?, ?, ?)',
   UPDATE_PATIENT: 'UPDATE patients SET first_name = ?, last_name = ?, email = ?, phone = ?, address = ?, diagnosis = ?, image_url = ? WHERE id = ?',
