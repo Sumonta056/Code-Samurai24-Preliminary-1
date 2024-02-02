@@ -3,6 +3,7 @@ import Response from "../domain/response.js";
 import logger from "../util/logger.js";
 import QUERY from "../query/patient.query.js";
 
+
 const HttpStatus = {
   OK: { code: 200, status: "OK" },
   CREATED: { code: 201, status: "CREATED" },
@@ -12,22 +13,73 @@ const HttpStatus = {
   INTERNAL_SERVER_ERROR: { code: 500, status: "INTERNAL_SERVER_ERROR" },
 };
 
+// export const getCoords = (req, res) => {
+//   logger.info(`${req.method} ${req.originalUrl}, fetching all books`);
+//   database.query(QUERY.SELECT_BOOKS, (error, results) => {
+//     if (!results) {
+//       res
+//         .status(HttpStatus.OK.code)
+//         .send(
+//           new Response(
+//             HttpStatus.OK.code,
+//             HttpStatus.OK.status,
+//             `No patients found`
+//           )
+//         );
+//     } else {
+//       return res.status(HttpStatus.OK.code).json({ books: results });
+//     }
+//   });
+// };
+
 export const getCoords = (req, res) => {
-  logger.info(`${req.method} ${req.originalUrl}, fetching all books`);
-  database.query(QUERY.SELECT_BOOKS, (error, results) => {
-    if (!results) {
-      res
-        .status(HttpStatus.OK.code)
-        .send(
-          new Response(
-            HttpStatus.OK.code,
-            HttpStatus.OK.status,
-            `No patients found`
-          )
-        );
-    } else {
-      return res.status(HttpStatus.OK.code).json({ books: results });
+  // Parse query parameters
+  const { title, author, genre, price, sort, order } = req.query;
+
+  // Construct the SQL query dynamically based on the provided parameters
+  let sqlQuery = "SELECT * FROM books WHERE 1";
+  const queryParams = [];
+
+  if (title) {
+    sqlQuery += " AND title LIKE ?";
+    queryParams.push(`%${title}%`);
+  }
+
+  if (price) {
+    sqlQuery += " AND price LIKE ?";
+    queryParams.push(`%${price}%`);
+  }
+
+  if (author) {
+    sqlQuery += " AND author LIKE ?";
+    queryParams.push(`%${author}%`);
+  }
+
+  if (genre) {
+    sqlQuery += " AND genre LIKE ?";
+    queryParams.push(`%${genre}%`);
+  }
+
+  if (sort && order) {
+    // Both sort and order parameters are provided
+    sqlQuery += ` ORDER BY ${sort} ${order}`;
+  } else if (sort) {
+    // Only sort parameter is provided
+    sqlQuery += ` ORDER BY ${sort} ASC`; // Default to ascending order if order is not provided
+  } else if (order) {
+    // Only sort parameter is provided
+    sqlQuery += ` ORDER BY id ${order}`; // Default to ascending order if order is not provided
+  }
+  
+
+  // Execute the SQL query
+  database.query(sqlQuery, queryParams, (error, results) => {
+    if (error) {
+      console.error("Error executing SQL query: ", error);
+      res.status(500).json({ error: "Internal server error" });
+      return;
     }
+    return res.status(HttpStatus.OK.code).json({ books: results });
   });
 };
 

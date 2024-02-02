@@ -23,7 +23,7 @@ app.get("/", (req, res) =>
     new Response(
       HttpStatus.OK.code,
       HttpStatus.OK.status,
-      "Patient API, v1.0.0 - All Systems Go"
+      "Books API, v1.0.0 - All Systems Go"
     )
   )
 );
