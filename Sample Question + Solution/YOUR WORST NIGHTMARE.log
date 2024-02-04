@@ -1,0 +1,128 @@
+Evaluating... Team: YOUR_WORST_NIGHTMARE, Host: http://localhost:5000
+
+Test 1: Path: GET /api/books
+Expected: {'status': 200, 'body': {'books': []}}
+Actual: {'status': 200, 'body': '{"books":[]}'}
+Score: 100
+
+Test 2: Path: GET /api/books/1
+Expected: {'status': 404, 'body': {'message': 'book with id: 1 was not found'}}
+Actual: {'status': 404, 'body': '{"message":"Book with id: 1 was not found"}'}
+Score: 20
+
+Test 3: Path: POST /api/books
+Expected: {'status': 201, 'body': {'id': 1, 'title': 'To Kill a Mockingbird', 'author': 'Harper Lee', 'genre': 'Fiction', 'price': 19.99}}
+Actual: {'status': 201, 'body': '{"id":1,"title":"To Kill a Mockingbird","author":"Harper Lee","genre":"Fiction","price":19.99}'}
+Score: 100
+
+Test 4: Path: POST /api/books
+Expected: {'status': 201, 'body': {'id': 2, 'title': 'Go Set a Watchman', 'author': 'Harper Lee', 'genre': 'Drama', 'price': 24.99}}
+Actual: {'status': 201, 'body': '{"id":2,"title":"Go Set a Watchman","author":"Harper Lee","genre":"Drama","price":24.99}'}
+Score: 100
+
+Test 5: Path: POST /api/books
+Expected: {'status': 201, 'body': {'id': 3, 'title': 'To Kill a Mockingbird: A Graphic Novel', 'author': 'Harper Lee', 'genre': 'Graphic Novel', 'price': 14.99}}
+Actual: {'status': 201, 'body': '{"id":3,"title":"To Kill a Mockingbird: A Graphic Novel","author":"Harper Lee","genre":"Graphic Novel","price":14.99}'}
+Score: 100
+
+Test 6: Path: POST /api/books
+Expected: {'status': 201, 'body': {'id': 4, 'title': 'Pride and Prejudice', 'author': 'Jane Austen', 'genre': 'Romance', 'price': 29.99}}
+Actual: {'status': 201, 'body': '{"id":4,"title":"Pride and Prejudice","author":"Jane Austen","genre":"Romance","price":29.99}'}
+Score: 100
+
+Test 7: Path: POST /api/books
+Expected: {'status': 201, 'body': {'id': 5, 'title': 'Sense and Sensibility', 'author': 'Jane Austen', 'genre': 'Romance', 'price': 17.99}}
+Actual: {'status': 201, 'body': '{"id":5,"title":"Sense and Sensibility","author":"Jane Austen","genre":"Romance","price":17.99}'}
+Score: 100
+
+Test 8: Path: POST /api/books
+Expected: {'status': 201, 'body': {'id': 6, 'title': 'Emma', 'author': 'Jane Austen', 'genre': 'Romance', 'price': 22.99}}
+Actual: {'status': 201, 'body': '{"id":6,"title":"Emma","author":"Jane Austen","genre":"Romance","price":22.99}'}
+Score: 100
+
+Test 9: Path: POST /api/books
+Expected: {'status': 201, 'body': {'id': 7, 'title': 'The Great Gatsby', 'author': 'F. Scott Fitzgerald', 'genre': 'Classic', 'price': 12.99}}
+Actual: {'status': 201, 'body': '{"id":7,"title":"The Great Gatsby","author":"F. Scott Fitzgerald","genre":"Classic","price":12.99}'}
+Score: 100
+
+Test 10: Path: POST /api/books
+Expected: {'status': 201, 'body': {'id': 8, 'title': 'Tender Is the Night', 'author': 'F. Scott Fitzgerald', 'genre': 'Classic', 'price': 27.99}}
+Actual: {'status': 201, 'body': '{"id":8,"title":"Tender Is the Night","author":"F. Scott Fitzgerald","genre":"Classic","price":27.99}'}
+Score: 100
+
+Test 11: Path: POST /api/books
+Expected: {'status': 201, 'body': {'id': 9, 'title': 'This Side of Paradise', 'author': 'F. Scott Fitzgerald', 'genre': 'Classic', 'price': 21.99}}
+Actual: {'status': 201, 'body': '{"id":9,"title":"This Side of Paradise","author":"F. Scott Fitzgerald","genre":"Classic","price":21.99}'}
+Score: 100
+
+Test 12: Path: POST /api/books
+Expected: {'status': 201, 'body': {'id': 10, 'title': 'Brave New World', 'author': 'Aldous Huxley', 'genre': 'Science Fiction', 'price': 18.99}}
+Actual: {'status': 201, 'body': '{"id":10,"title":"Brave New World","author":"Aldous Huxley","genre":"Science Fiction","price":18.99}'}
+Score: 100
+
+Test 13: Path: POST /api/books
+Expected: {'status': 201, 'body': {'id': 11, 'title': 'Island', 'author': 'Aldous Huxley', 'genre': 'Science Fiction', 'price': 16.99}}
+Actual: {'status': 201, 'body': '{"id":11,"title":"Island","author":"Aldous Huxley","genre":"Science Fiction","price":16.99}'}
+Score: 100
+
+Test 14: Path: POST /api/books
+Expected: {'status': 201, 'body': {'id': 12, 'title': 'The Doors of Perception', 'author': 'Aldous Huxley', 'genre': 'Science Fiction', 'price': 25.99}}
+Actual: {'status': 201, 'body': '{"id":12,"title":"The Doors of Perception","author":"Aldous Huxley","genre":"Science Fiction","price":25.99}'}
+Score: 100
+
+Test 15: Path: POST /api/books
+Expected: {'status': 201, 'body': {'id': 13, 'title': 'Crime and Punishment', 'author': 'Fyodor Dostoevsky', 'genre': 'Psychological Thriller', 'price': 23.99}}
+Actual: {'status': 201, 'body': '{"id":13,"title":"Crime and Punishment","author":"Fyodor Dostoevsky","genre":"Psychological Thriller","price":23.99}'}
+Score: 100
+
+Test 16: Path: POST /api/books
+Expected: {'status': 201, 'body': {'id': 14, 'title': 'The Brothers Karamazov', 'author': 'Fyodor Dostoevsky', 'genre': 'Psychological Thriller', 'price': 31.99}}
+Actual: {'status': 201, 'body': '{"id":14,"title":"The Brothers Karamazov","author":"Fyodor Dostoevsky","genre":"Psychological Thriller","price":31.99}'}
+Score: 100
+
+Test 17: Path: POST /api/books
+Expected: {'status': 201, 'body': {'id': 15, 'title': 'Demons', 'author': 'Fyodor Dostoevsky', 'genre': 'Psychological Thriller', 'price': 20.99}}
+Actual: {'status': 201, 'body': '{"id":15,"title":"Demons","author":"Fyodor Dostoevsky","genre":"Psychological Thriller","price":20.99}'}
+Score: 100
+
+Test 18: Path: GET /api/books
+Expected: {'status': 200, 'body': {'books': [{'id': 1, 'title': 'To Kill a Mockingbird', 'author': 'Harper Lee', 'genre': 'Fiction', 'price': 19.99}, {'id': 2, 'title': 'Go Set a Watchman', 'author': 'Harper Lee', 'genre': 'Drama', 'price': 24.99}, {'id': 3, 'title': 'To Kill a Mockingbird: A Graphic Novel', 'author': 'Harper Lee', 'genre': 'Graphic Novel', 'price': 14.99}, {'id': 4, 'title': 'Pride and Prejudice', 'author': 'Jane Austen', 'genre': 'Romance', 'price': 29.99}, {'id': 5, 'title': 'Sense and Sensibility', 'author': 'Jane Austen', 'genre': 'Romance', 'price': 17.99}, {'id': 6, 'title': 'Emma', 'author': 'Jane Austen', 'genre': 'Romance', 'price': 22.99}, {'id': 7, 'title': 'The Great Gatsby', 'author': 'F. Scott Fitzgerald', 'genre': 'Classic', 'price': 12.99}, {'id': 8, 'title': 'Tender Is the Night', 'author': 'F. Scott Fitzgerald', 'genre': 'Classic', 'price': 27.99}, {'id': 9, 'title': 'This Side of Paradise', 'author': 'F. Scott Fitzgerald', 'genre': 'Classic', 'price': 21.99}, {'id': 10, 'title': 'Brave New World', 'author': 'Aldous Huxley', 'genre': 'Science Fiction', 'price': 18.99}, {'id': 11, 'title': 'Island', 'author': 'Aldous Huxley', 'genre': 'Science Fiction', 'price': 16.99}, {'id': 12, 'title': 'The Doors of Perception', 'author': 'Aldous Huxley', 'genre': 'Science Fiction', 'price': 25.99}, {'id': 13, 'title': 'Crime and Punishment', 'author': 'Fyodor Dostoevsky', 'genre': 'Psychological Thriller', 'price': 23.99}, {'id': 14, 'title': 'The Brothers Karamazov', 'author': 'Fyodor Dostoevsky', 'genre': 'Psychological Thriller', 'price': 31.99}, {'id': 15, 'title': 'Demons', 'author': 'Fyodor Dostoevsky', 'genre': 'Psychological Thriller', 'price': 20.99}]}}
+Actual: {'status': 200, 'body': '{"books":[{"id":1,"title":"To Kill a Mockingbird","author":"Harper Lee","genre":"Fiction","price":19.99},{"id":2,"title":"Go Set a Watchman","author":"Harper Lee","genre":"Drama","price":24.99},{"id":3,"title":"To Kill a Mockingbird: A Graphic Novel","author":"Harper Lee","genre":"Graphic Novel","price":14.99},{"id":4,"title":"Pride and Prejudice","author":"Jane Austen","genre":"Romance","price":29.99},{"id":5,"title":"Sense and Sensibility","author":"Jane Austen","genre":"Romance","price":17.99},{"id":6,"title":"Emma","author":"Jane Austen","genre":"Romance","price":22.99},{"id":7,"title":"The Great Gatsby","author":"F. Scott Fitzgerald","genre":"Classic","price":12.99},{"id":8,"title":"Tender Is the Night","author":"F. Scott Fitzgerald","genre":"Classic","price":27.99},{"id":9,"title":"This Side of Paradise","author":"F. Scott Fitzgerald","genre":"Classic","price":21.99},{"id":10,"title":"Brave New World","author":"Aldous Huxley","genre":"Science Fiction","price":18.99},{"id":11,"title":"Island","author":"Aldous Huxley","genre":"Science Fiction","price":16.99},{"id":12,"title":"The Doors of Perception","author":"Aldous Huxley","genre":"Science Fiction","price":25.99}]}'}
+Score: 20
+
+Test 19: Path: GET /api/books?genre=Romance&sort=author
+Expected: {'status': 200, 'body': {'books': [{'id': 4, 'title': 'Pride and Prejudice', 'author': 'Jane Austen', 'genre': 'Romance', 'price': 29.99}, {'id': 5, 'title': 'Sense and Sensibility', 'author': 'Jane Austen', 'genre': 'Romance', 'price': 17.99}, {'id': 6, 'title': 'Emma', 'author': 'Jane Austen', 'genre': 'Romance', 'price': 22.99}]}}
+Actual: {'status': 200, 'body': '{"books":[{"id":4,"title":"Pride and Prejudice","author":"Jane Austen","genre":"Romance","price":29.99},{"id":5,"title":"Sense and Sensibility","author":"Jane Austen","genre":"Romance","price":17.99},{"id":6,"title":"Emma","author":"Jane Austen","genre":"Romance","price":22.99}]}'}
+Score: 100
+
+Test 20: Path: GET /api/books?title=Demons
+Expected: {'status': 200, 'body': {'books': [{'id': 15, 'title': 'Demons', 'author': 'Fyodor Dostoevsky', 'genre': 'Psychological Thriller', 'price': 20.99}]}}
+Actual: {'status': 200, 'body': '{"books":[{"id":15,"title":"Demons","author":"Fyodor Dostoevsky","genre":"Psychological Thriller","price":20.99}]}'}
+Score: 100
+
+Test 21: Path: GET /api/books?sort=genre&order=DESC
+Expected: {'status': 200, 'body': {'books': [{'id': 10, 'title': 'Brave New World', 'author': 'Aldous Huxley', 'genre': 'Science Fiction', 'price': 18.99}, {'id': 11, 'title': 'Island', 'author': 'Aldous Huxley', 'genre': 'Science Fiction', 'price': 16.99}, {'id': 12, 'title': 'The Doors of Perception', 'author': 'Aldous Huxley', 'genre': 'Science Fiction', 'price': 25.99}, {'id': 4, 'title': 'Pride and Prejudice', 'author': 'Jane Austen', 'genre': 'Romance', 'price': 29.99}, {'id': 5, 'title': 'Sense and Sensibility', 'author': 'Jane Austen', 'genre': 'Romance', 'price': 17.99}, {'id': 6, 'title': 'Emma', 'author': 'Jane Austen', 'genre': 'Romance', 'price': 22.99}, {'id': 13, 'title': 'Crime and Punishment', 'author': 'Fyodor Dostoevsky', 'genre': 'Psychological Thriller', 'price': 23.99}, {'id': 14, 'title': 'The Brothers Karamazov', 'author': 'Fyodor Dostoevsky', 'genre': 'Psychological Thriller', 'price': 31.99}, {'id': 15, 'title': 'Demons', 'author': 'Fyodor Dostoevsky', 'genre': 'Psychological Thriller', 'price': 20.99}, {'id': 3, 'title': 'To Kill a Mockingbird: A Graphic Novel', 'author': 'Harper Lee', 'genre': 'Graphic Novel', 'price': 14.99}, {'id': 1, 'title': 'To Kill a Mockingbird', 'author': 'Harper Lee', 'genre': 'Fiction', 'price': 19.99}, {'id': 2, 'title': 'Go Set a Watchman', 'author': 'Harper Lee', 'genre': 'Drama', 'price': 24.99}, {'id': 7, 'title': 'The Great Gatsby', 'author': 'F. Scott Fitzgerald', 'genre': 'Classic', 'price': 12.99}, {'id': 8, 'title': 'Tender Is the Night', 'author': 'F. Scott Fitzgerald', 'genre': 'Classic', 'price': 27.99}, {'id': 9, 'title': 'This Side of Paradise', 'author': 'F. Scott Fitzgerald', 'genre': 'Classic', 'price': 21.99}]}}
+Actual: {'status': 200, 'body': '{"books":[{"id":10,"title":"Brave New World","author":"Aldous Huxley","genre":"Science Fiction","price":18.99},{"id":11,"title":"Island","author":"Aldous Huxley","genre":"Science Fiction","price":16.99},{"id":12,"title":"The Doors of Perception","author":"Aldous Huxley","genre":"Science Fiction","price":25.99},{"id":4,"title":"Pride and Prejudice","author":"Jane Austen","genre":"Romance","price":29.99},{"id":5,"title":"Sense and Sensibility","author":"Jane Austen","genre":"Romance","price":17.99},{"id":6,"title":"Emma","author":"Jane Austen","genre":"Romance","price":22.99},{"id":13,"title":"Crime and Punishment","author":"Fyodor Dostoevsky","genre":"Psychological Thriller","price":23.99},{"id":14,"title":"The Brothers Karamazov","author":"Fyodor Dostoevsky","genre":"Psychological Thriller","price":31.99},{"id":15,"title":"Demons","author":"Fyodor Dostoevsky","genre":"Psychological Thriller","price":20.99},{"id":3,"title":"To Kill a Mockingbird: A Graphic Novel","author":"Harper Lee","genre":"Graphic Novel","price":14.99},{"id":1,"title":"To Kill a Mockingbird","author":"Harper Lee","genre":"Fiction","price":19.99},{"id":2,"title":"Go Set a Watchman","author":"Harper Lee","genre":"Drama","price":24.99},{"id":7,"title":"The Great Gatsby","author":"F. Scott Fitzgerald","genre":"Classic","price":12.99},{"id":8,"title":"Tender Is the Night","author":"F. Scott Fitzgerald","genre":"Classic","price":27.99},{"id":9,"title":"This Side of Paradise","author":"F. Scott Fitzgerald","genre":"Classic","price":21.99}]}'}
+Score: 100
+
+Test 22: Path: PUT /api/books/25
+Expected: {'status': 404, 'body': {'message': 'book with id: 25 was not found'}}
+Actual: {'status': 404, 'body': '{"message":"Book with id: 25 was not found"}'}
+Score: 20
+
+Test 23: Path: PUT /api/books/10
+Expected: {'status': 200, 'body': {'id': 10, 'title': 'Brave New World', 'author': 'Aldous Huxley', 'genre': 'Science Fiction', 'price': 19.99}}
+Actual: {'status': 200, 'body': '{"id":10,"title":"Brave New World","author":"Aldous Huxley","genre":"Science Fiction","price":19.99}'}
+Score: 100
+
+Test 24: Path: GET /api/books/10
+Expected: {'status': 200, 'body': {'id': 10, 'title': 'Brave New World', 'author': 'Aldous Huxley', 'genre': 'Science Fiction', 'price': 19.99}}
+Actual: {'status': 200, 'body': '{"id":10,"title":"Brave New World","author":"Aldous Huxley","genre":"Science Fiction","price":19.99}'}
+Score: 100
+
+Test 25: Path: GET /api/books?author=Aldous%20Huxley&sort=title&order=DESC
+Expected: {'status': 200, 'body': {'books': [{'id': 12, 'title': 'The Doors of Perception', 'author': 'Aldous Huxley', 'genre': 'Science Fiction', 'price': 25.99}, {'id': 11, 'title': 'Island', 'author': 'Aldous Huxley', 'genre': 'Science Fiction', 'price': 16.99}, {'id': 10, 'title': 'Brave New World', 'author': 'Aldous Huxley', 'genre': 'Science Fiction', 'price': 19.99}]}}
+Actual: {'status': 200, 'body': '{"books":[{"id":12,"title":"The Doors of Perception","author":"Aldous Huxley","genre":"Science Fiction","price":25.99},{"id":11,"title":"Island","author":"Aldous Huxley","genre":"Science Fiction","price":16.99},{"id":10,"title":"Brave New World","author":"Aldous Huxley","genre":"Science Fiction","price":19.99}]}'}
+Score: 100
+
+Team: YOUR_WORST_NIGHTMARE, Score: 2260
