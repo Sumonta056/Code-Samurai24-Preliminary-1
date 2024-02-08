@@ -6,7 +6,7 @@ import Response from "./domain/response.js";
 import HttpStatus from "./controller/patient.controller.js";
 import patientRoutes from "./route/patient.route.js";
 import coordsRoutes from "./route/coords.route.js";
-import bookRoutes from "./route/book.route.js";
+import bookRoutes from "./route/books.route.js";
 import logger from "./util/logger.js";
 
 dotenv.config();

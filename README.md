@@ -104,33 +104,33 @@ SELECT * FROM coords;
 - **👉 GET APIs**
 
 ```
-http://localhost:3000
+http://localhost:8000
 ```
 
 ```
-http://localhost:3000/patients
+http://localhost:8000/patients
 ```
 
 ```
-http://localhost:3000/p1
+http://localhost:8000/p1
 ```
 
 ```
-http://localhost:3000/p1/avg
+http://localhost:8000/p1/avg
 ```
 ```
-http://localhost:5000/api/books
+http://localhost:8000/api/books
 ```
 
 ```
-http://localhost:5000/api/books?author=Jane%20Austen&sort=price
+http://localhost:8000/api/books?author=Jane%20Austen&sort=price
 ```
 
 
 - **👉 POST APIs**
 
 ```
-http://localhost:3000/patients
+http://localhost:8000/patients
 ```
 
 ```
@@ -148,7 +148,7 @@ http://localhost:3000/patients
 ![Alt text](image.png)
 
 ```
-http://localhost:3000/p1
+http://localhost:8000/p1
 ```
 ```
 {
@@ -157,7 +157,7 @@ http://localhost:3000/p1
 }
 ```
 ```
-http://localhost:5000/api/books
+http://localhost:8000/api/books
 ```
 
 ```
@@ -173,7 +173,7 @@ http://localhost:5000/api/books
 - **👉 PUT APIs**
 
 ```
-http://localhost:3000/p1
+http://localhost:8000/p1
 ```
 ```
 {
@@ -182,7 +182,7 @@ http://localhost:3000/p1
 }
 ```
 ```
-http://localhost:5000/api/books/2
+http://localhost:8000/api/books/2
 ```
 ```
 {

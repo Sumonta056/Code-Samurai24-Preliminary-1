@@ -3,7 +3,6 @@ import Response from "../domain/response.js";
 import logger from "../util/logger.js";
 import QUERY from "../query/patient.query.js";
 
-
 const HttpStatus = {
   OK: { code: 200, status: "OK" },
   CREATED: { code: 201, status: "CREATED" },
@@ -70,7 +69,6 @@ export const getCoords = (req, res) => {
     // Only sort parameter is provided
     sqlQuery += ` ORDER BY id ${order}`; // Default to ascending order if order is not provided
   }
-  
 
   // Execute the SQL query
   database.query(sqlQuery, queryParams, (error, results) => {
@@ -79,6 +77,16 @@ export const getCoords = (req, res) => {
       res.status(500).json({ error: "Internal server error" });
       return;
     }
+
+    const books = results.map((result) => ({
+      id: result.id,
+      title: result.title,
+      author: result.author,
+      genre: result.genre,
+      price: result.price,
+    }));
+
+    // return res.status(HttpStatus.OK.code).json({ books });
     return res.status(HttpStatus.OK.code).json({ books: results });
   });
 };
@@ -144,7 +152,7 @@ export const updateeCoords = async (req, res) => {
       if (results.length === 0) {
         res
           .status(404)
-          .json({ message: `Book with id: ${bookId} was not found` });
+          .json({ message: `book with id: ${bookId} was not found` });
         return;
       }
 
@@ -198,7 +206,7 @@ export const getCoordsID = (req, res) => {
     // If no results found, return 404
     if (results.length === 0) {
       res.status(HttpStatus.NOT_FOUND.code).json({
-        message: `Book with id: ${bookId} was not found`,
+        message: `book with id: ${bookId} was not found`,
       });
       return;
     }
