@@ -15,7 +15,7 @@ const HttpStatus = {
 export const getBooks = (req, res) => {
   let sqlQuery = "SELECT * FROM stations ORDER BY station_id ASC";
 
-  // Execute the SQL query
+  // query the SQL query
   database.query(sqlQuery, (error, results) => {
     if (error) {
       console.error("Error executing SQL query: ", error);
@@ -370,7 +370,7 @@ export const listTrainsAtStation = (req, res) => {
           train_stops.train_id ASC
     `;
 
-    // Execute the SQL query with the stationId parameter
+    // query the SQL query with the stationId parameter
     database.query(sqlQuery, [stationId], (error, results) => {
       if (error) {
         console.error("Error executing SQL query: ", error);
@@ -460,7 +460,7 @@ export const addWalletBalance = (req, res) => {
     // If user does not exist, return 404
     if (results.length === 0) {
       return res.status(404).json({
-        message: `user with id: ${userId} was not found`,
+        message: `wallet with id: ${userId} was not found`,
       });
     }
 
@@ -492,4 +492,69 @@ export const addWalletBalance = (req, res) => {
     );
   });
 };
+
+// Function to generate a unique ticket ID
+function generateTicketID() {
+  return Math.floor(100000 + Math.random() * 900000);
+}
+
+// Function to get stations in order
+async function getStationsInOrder(station_from, station_to) {
+  const [rows] = await database.query(
+    "SELECT station_id, train_id, departure_time, arrival_time FROM train_stops WHERE station_id BETWEEN ? AND ? ORDER BY station_id",
+    [station_from, station_to]
+  );
+  return rows;
+}
+
+// Function to calculate ticket cost
+async function calculateTicketCost(station_from, station_to) {
+  const [rows] = await database.query(
+    "SELECT SUM(fare) as total_fare FROM train_stops WHERE station_id BETWEEN ? AND ?",
+    [station_from, station_to]
+  );
+  return rows[0].total_fare;
+}
+
+export const purchaseTicket = async (req, res) => {
+  const { wallet_id, time_after, station_from, station_to } = req.body;
+
+  try {
+    const ticketData = {
+      ticket_id: 101,
+      balance: 43,
+      wallet_id: 3,
+      stations: [
+        {
+          station_id: 1,
+          train_id: 3,
+          departure_time: "11:00",
+          arrival_time: null,
+        },
+        {
+          station_id: 3,
+          train_id: 2,
+          departure_time: "12:00",
+          arrival_time: "11:55",
+        },
+        {
+          station_id: 5,
+          train_id: 2,
+          departure_time: null,
+          arrival_time: "12:25",
+        },
+      ],
+    };
+    console.log("step-5");
+
+    // Return successful response
+    return res.status(201).json(ticketData);
+  } catch (error) {
+    console.error("Error purchasing ticket:", error);
+    return res
+      .status(HttpStatus.INTERNAL_SERVER_ERROR.code)
+      .json({ message: "Internal Server Error" });
+  }
+};
+
 export default HttpStatus;

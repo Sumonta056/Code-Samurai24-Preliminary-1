@@ -7,6 +7,7 @@ import {
   getBooks,
   getWallet,
   addWalletBalance,
+  purchaseTicket,
 } from "../controller/template.controller.js";
 
 const routesMap = express.Router();
@@ -20,5 +21,7 @@ routesMap.route("/trains").post(createTrain);
 routesMap.route("/stations/:station_id/trains").get(listTrainsAtStation);
 
 routesMap.route("/wallets/:user_id").get(getWallet).put(addWalletBalance);
+
+routesMap.route("/tickets").put(purchaseTicket);
 
 export default routesMap;
