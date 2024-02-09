@@ -1,23 +1,15 @@
 import express from "express";
 import {
-  getBooks,
-  createBooks,
-  updateBooks,
-  getBookByID,
-  deleteBookByID,
   createUser,
+  createStation,
 } from "../controller/template.controller.js";
 
 const routesMap = express.Router();
 
-routesMap.route("/").get(getBooks).post(createBooks).put(updateBooks);
 
 routesMap.route("/users").post(createUser);
 
-routesMap
-  .route("/:id")
-  .get(getBookByID)
-  .put(updateBooks)
-  .delete(deleteBookByID);
+routesMap.route("/stations").post(createStation);
+
 
 export default routesMap;

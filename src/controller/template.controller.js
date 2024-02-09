@@ -279,5 +279,43 @@ export const createUser = async (req, res) => {
   }
 };
 
+export const createStation = async (req, res) => {
+  logger.info(`${req.method} ${req.originalUrl}, creating station`);
+  try {
+    const sql =
+      "INSERT INTO stations (station_id, station_name, longitude, latitude) VALUES (?, ?, ?, ?)";
+    const values = [
+      req.body.station_id,
+      req.body.station_name,
+      req.body.longitude,
+      req.body.latitude,
+    ];
+    console.log(req.body);
+    console.log(values);
+
+    const insertedStation = {
+      station_id: req.body.station_id,
+      station_name: req.body.station_name,
+      longitude: req.body.longitude,
+      latitude: req.body.latitude,
+    };
+
+    await database.query(sql, values);
+    return res.status(HttpStatus.CREATED.code).json(insertedStation);
+  } catch (error) {
+    logger.error("Error inserting station:", error);
+    return res
+      .status(HttpStatus.INTERNAL_SERVER_ERROR.code)
+      .send(
+        new Response(
+          HttpStatus.INTERNAL_SERVER_ERROR.code,
+          HttpStatus.INTERNAL_SERVER_ERROR.status,
+          "Error inserting station"
+        )
+      );
+  }
+};
+
+
 
 export default HttpStatus;
