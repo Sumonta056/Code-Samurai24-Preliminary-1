@@ -244,4 +244,40 @@ export const deleteBookByID = (req, res) => {
   );
 };
 
+export const createUser = async (req, res) => {
+  logger.info(`${req.method} ${req.originalUrl}, creating user`);
+  try {
+    const sql =
+      "INSERT INTO users (user_id, user_name, balance) VALUES (?, ?, ?)";
+    const values = [
+      req.body.user_id,
+      req.body.user_name,
+      req.body.balance,
+    ];
+    console.log(req.body);
+    console.log(values);
+
+    const insertedUser = {
+      user_id: req.body.user_id,
+      user_name: req.body.user_name,
+      balance: req.body.balance,
+    };
+
+    await database.query(sql, values);
+    return res.status(HttpStatus.CREATED.code).json(insertedUser);
+  } catch (error) {
+    logger.error("Error inserting user:", error);
+    return res
+      .status(HttpStatus.INTERNAL_SERVER_ERROR.code)
+      .send(
+        new Response(
+          HttpStatus.INTERNAL_SERVER_ERROR.code,
+          HttpStatus.INTERNAL_SERVER_ERROR.status,
+          "Error inserting user"
+        )
+      );
+  }
+};
+
+
 export default HttpStatus;

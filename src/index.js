@@ -19,7 +19,7 @@ app.use(express.json());
 app.use("/patients", patientRoutes);
 app.use("/p1", coordsRoutes);
 app.use("/api/books", bookRoutes);
-app.use("/template", templateRoutes);
+app.use("/api", templateRoutes);
 
 app.get("/", (req, res) =>
   res.send(
