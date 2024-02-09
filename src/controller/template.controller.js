@@ -13,62 +13,21 @@ const HttpStatus = {
 };
 
 export const getBooks = (req, res) => {
-  // Parse query parameters
-  const { title, author, genre, price, sort, order } = req.query;
-
-  // Construct the SQL query dynamically based on the provided parameters
-  let sqlQuery = "SELECT * FROM books WHERE 1";
-  const queryParams = [];
-
-  if (title) {
-    sqlQuery += " AND title LIKE ?";
-    queryParams.push(`%${title}%`);
-  }
-
-  if (price) {
-    sqlQuery += " AND price LIKE ?";
-    queryParams.push(`%${price}%`);
-  }
-
-  if (author) {
-    sqlQuery += " AND author LIKE ?";
-    queryParams.push(`%${author}%`);
-  }
-
-  if (genre) {
-    sqlQuery += " AND genre LIKE ?";
-    queryParams.push(`%${genre}%`);
-  }
-
-  if (sort && order) {
-    // Both sort and order parameters are provided
-    sqlQuery += ` ORDER BY ${sort} ${order}`;
-  } else if (sort) {
-    // Only sort parameter is provided
-    sqlQuery += ` ORDER BY ${sort} ASC`; // Default to ascending order if order is not provided
-  } else if (order) {
-    // Only sort parameter is provided
-    sqlQuery += ` ORDER BY id ${order}`; // Default to ascending order if order is not provided
-  }
+  let sqlQuery = "SELECT * FROM stations ORDER BY station_id ASC";
 
   // Execute the SQL query
-  database.query(sqlQuery, queryParams, (error, results) => {
+  database.query(sqlQuery, (error, results) => {
     if (error) {
       console.error("Error executing SQL query: ", error);
       res.status(500).json({ error: "Internal server error" });
       return;
     }
 
-    const books = results.map((result) => ({
-      id: result.id,
-      title: result.title,
-      author: result.author,
-      genre: result.genre,
-      price: result.price,
-    }));
+    const response = {
+      stations: results,
+    };
 
-    // return res.status(HttpStatus.OK.code).json({ books });
-    return res.status(HttpStatus.OK.code).json({ books: results });
+    return res.status(HttpStatus.OK.code).json(response);
   });
 };
 
@@ -233,11 +192,9 @@ export const deleteBookByID = (req, res) => {
             return;
           }
           // Return success message
-          res
-            .status(201)
-            .json({
-              message: `Book with id: ${bookId} was successfully deteted`,
-            });
+          res.status(201).json({
+            message: `Book with id: ${bookId} was successfully deteted`,
+          });
         }
       );
     }
@@ -249,11 +206,7 @@ export const createUser = async (req, res) => {
   try {
     const sql =
       "INSERT INTO users (user_id, user_name, balance) VALUES (?, ?, ?)";
-    const values = [
-      req.body.user_id,
-      req.body.user_name,
-      req.body.balance,
-    ];
+    const values = [req.body.user_id, req.body.user_name, req.body.balance];
     console.log(req.body);
     console.log(values);
 
@@ -316,6 +269,227 @@ export const createStation = async (req, res) => {
   }
 };
 
+export const createTrain = async (req, res) => {
+  logger.info(`${req.method} ${req.originalUrl}, creating train`);
+  try {
+    const trainId = req.body.train_id;
+    const trainName = req.body.train_name;
+    const capacity = req.body.capacity;
+    const stops = req.body.stops;
 
+    // Calculate service start and end times
+    const serviceStart = stops[0].departure_time;
+    const serviceEnds = stops[stops.length - 1].arrival_time;
 
+    // Calculate number of stations
+    const numStations = stops.length;
+
+    // Save train details into trains table
+    const insertTrainSql =
+      "INSERT INTO trains (train_id, train_name, capacity) VALUES (?, ?, ?)";
+    const trainValues = [trainId, trainName, capacity];
+    await database.query(insertTrainSql, trainValues);
+
+    // Save train stops into train_stops table
+    const insertStopsSql =
+      "INSERT INTO train_stops (train_id, station_id, arrival_time, departure_time, fare) VALUES (?, ?, ?, ?, ?)";
+    console.log(stops);
+
+    for (const stop of stops) {
+      // Create an array of values for the current stop
+      const stopValues = [
+        trainId,
+        stop.station_id,
+        stop.arrival_time,
+        stop.departure_time,
+        stop.fare,
+      ];
+
+      console.log(stopValues);
+
+      await database.query(insertStopsSql, stopValues);
+    }
+
+    // Return successful response
+    const responseBody = {
+      train_id: trainId,
+      train_name: trainName,
+      capacity: capacity,
+      service_start: serviceStart,
+      service_ends: serviceEnds,
+      num_stations: numStations,
+    };
+    return res.status(HttpStatus.CREATED.code).json(responseBody);
+  } catch (error) {
+    logger.error("Error inserting train:", error);
+    return res
+      .status(HttpStatus.INTERNAL_SERVER_ERROR.code)
+      .send(
+        new Response(
+          HttpStatus.INTERNAL_SERVER_ERROR.code,
+          HttpStatus.INTERNAL_SERVER_ERROR.status,
+          "Error inserting train"
+        )
+      );
+  }
+};
+
+export const listTrainsAtStation = (req, res) => {
+  const stationId = req.params.station_id;
+
+  // Check if the station exists
+  let stationExistsQuery = "SELECT * FROM stations WHERE station_id = ?";
+  database.query(stationExistsQuery, [stationId], (error, stationResult) => {
+    if (error) {
+      console.error("Error checking if the station exists: ", error);
+      return res.status(500).json({ error: "Internal server error" });
+    }
+
+    if (stationResult.length === 0) {
+      return res
+        .status(404)
+        .json({ message: `Station with id: ${stationId} was not found` });
+    }
+
+    // Query to fetch trains at the given station
+    let sqlQuery = `
+      SELECT train_stops.train_id, train_stops.arrival_time, train_stops.departure_time
+      FROM train_stops
+      WHERE train_stops.station_id = ?
+      ORDER BY 
+          CASE 
+              WHEN train_stops.departure_time IS NULL THEN 1
+              ELSE 0
+          END,
+          train_stops.departure_time ASC,
+          CASE 
+              WHEN train_stops.arrival_time IS NULL THEN 1
+              ELSE 0
+          END,
+          train_stops.arrival_time ASC,
+          train_stops.train_id ASC
+    `;
+
+    // Execute the SQL query with the stationId parameter
+    database.query(sqlQuery, [stationId], (error, results) => {
+      if (error) {
+        console.error("Error executing SQL query: ", error);
+        return res.status(500).json({ error: "Internal server error" });
+      }
+
+      // Prepare the response
+      const response = {
+        station_id: stationId,
+        trains: results,
+      };
+
+      // If no train passes through the station, return empty trains array
+      if (results.length === 0) {
+        return res.status(200).json(response);
+      }
+
+      // Send the response
+      return res.status(200).json(response);
+    });
+  });
+};
+export const getWallet = (req, res) => {
+  logger.info(`${req.method} ${req.originalUrl}, fetching wallet balance`);
+  const userId = req.params.user_id; // Extract user_id from URL
+  logger.info(
+    `${req.method} ${req.originalUrl}, fetching wallet with user ID: ${userId}`
+  );
+
+  // Query the database to fetch the wallet balance and user name using the user ID
+  const query = `
+    SELECT user_id, user_name, balance
+    FROM users
+    WHERE user_id = ?
+  `;
+  database.query(query, [userId], (error, results) => {
+    if (error) {
+      logger.error("Error fetching wallet from database:", error);
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR.code).json({
+        message: "Internal server error",
+      });
+      return;
+    }
+
+    // If no results found, return 404
+    if (results.length === 0) {
+      res.status(HttpStatus.NOT_FOUND.code).json({
+        message: `wallet with id: ${userId} was not found`,
+      });
+      return;
+    }
+
+    // Return the fetched wallet information
+    const wallet = results[0];
+    res.status(HttpStatus.OK.code).json({
+      wallet_id: wallet.user_id,
+      balance: wallet.balance,
+      wallet_user: {
+        user_id: wallet.user_id,
+        user_name: wallet.user_name,
+      },
+    });
+  });
+};
+
+export const addWalletBalance = (req, res) => {
+  const userId = req.params.user_id; // Extract user_id from URL
+  const rechargeAmount = req.body.recharge;
+
+  // Check if recharge amount is within range (100 - 10000)
+  if (rechargeAmount < 100 || rechargeAmount > 10000) {
+    return res.status(400).json({
+      message: `invalid amount: ${rechargeAmount}`,
+    });
+  }
+
+  // Check if user exists
+  const checkUserQuery = `SELECT * FROM users WHERE user_id = ?`;
+  database.query(checkUserQuery, [userId], (error, results) => {
+    if (error) {
+      console.error("Error checking user:", error);
+      return res.status(500).json({
+        message: "Internal server error",
+      });
+    }
+
+    // If user does not exist, return 404
+    if (results.length === 0) {
+      return res.status(404).json({
+        message: `user with id: ${userId} was not found`,
+      });
+    }
+
+    // Update wallet balance
+    const currentBalance = results[0].balance;
+    const newBalance = currentBalance + rechargeAmount;
+    const updateBalanceQuery = `UPDATE users SET balance = ? WHERE user_id = ?`;
+    database.query(
+      updateBalanceQuery,
+      [newBalance, userId],
+      (updateError, updateResults) => {
+        if (updateError) {
+          console.error("Error updating wallet balance:", updateError);
+          return res.status(500).json({
+            message: "Internal server error",
+          });
+        }
+
+        // Return successful response with updated balance
+        return res.status(200).json({
+          wallet_id: userId,
+          wallet_balance: newBalance,
+          wallet_user: {
+            user_id: userId,
+            user_name: results[0].user_name,
+          },
+        });
+      }
+    );
+  });
+};
 export default HttpStatus;
