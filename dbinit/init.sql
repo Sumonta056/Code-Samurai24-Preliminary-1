@@ -14,7 +14,6 @@ CREATE TABLE books (
     price FLOAT NOT NULL
 );
 
-
 DROP TABLE IF EXISTS coords;
 
 CREATE TABLE coords (

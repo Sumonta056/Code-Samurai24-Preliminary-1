@@ -1,6 +1,10 @@
 <div align = "center">
 
-## 🧠 Team Name : YOUR WORST NIGHTMARE
+## 🧠 Team Name : YOUR_WORST_NIGHTMARE
+
+#### 🧠 Institution Name : Shahjalal University of Science and Technology (SUST)
+
+#### 🧠 Team Member Emails : (sumontasaha80@gmail.com) (promimojumder8@gmail.com) (ridwan.siam@gmail.com)
 
 _------ **🧠 Tutorial NodeJS API with mySQL and Docker 🧠** ------_
 
@@ -118,6 +122,7 @@ http://localhost:8000/p1
 ```
 http://localhost:8000/p1/avg
 ```
+
 ```
 http://localhost:8000/api/books
 ```
@@ -125,7 +130,6 @@ http://localhost:8000/api/books
 ```
 http://localhost:8000/api/books?author=Jane%20Austen&sort=price
 ```
-
 
 - **👉 POST APIs**
 
@@ -150,12 +154,14 @@ http://localhost:8000/patients
 ```
 http://localhost:8000/p1
 ```
+
 ```
 {
   "x": "22",
   "y": "4"
 }
 ```
+
 ```
 http://localhost:8000/api/books
 ```
@@ -175,15 +181,18 @@ http://localhost:8000/api/books
 ```
 http://localhost:8000/p1
 ```
+
 ```
 {
   "x": "4",
   "y": "2"
 }
 ```
+
 ```
 http://localhost:8000/api/books/2
 ```
+
 ```
 {
  "title": "Shash Bela",
