@@ -7,6 +7,7 @@ import HttpStatus from "./controller/patient.controller.js";
 import patientRoutes from "./route/patient.route.js";
 import coordsRoutes from "./route/coords.route.js";
 import bookRoutes from "./route/books.route.js";
+import templateRoutes from "./route/template.route.js";
 import logger from "./util/logger.js";
 
 dotenv.config();
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use("/patients", patientRoutes);
 app.use("/p1", coordsRoutes);
 app.use("/api/books", bookRoutes);
+app.use("/template", templateRoutes);
 
 app.get("/", (req, res) =>
   res.send(
