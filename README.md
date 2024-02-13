@@ -4,7 +4,7 @@
 
 #### 🧠 Institution Name : Shahjalal University of Science and Technology (SUST)
 
-#### 🧠 Team Member Emails : (sumontasaha80@gmail.com) (promimojumder8@gmail.com) (ridwan.siam@gmail.com)
+###### 🧠 Team Member Emails : (sumontasaha80@gmail.com) (promimojumder8@gmail.com) (ridwan.siam@gmail.com)
 
 _------ **🧠 Tutorial NodeJS API with mySQL and Docker 🧠** ------_
 
